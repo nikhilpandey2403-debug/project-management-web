@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ProjectFlow - Login</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #667eea;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #667eea;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background: #5568d9;
+        }
+
+        #errorMessage {
+            display: none;
+            color: #d32f2f;
+            background: #ffeaea;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 500px) {
+
+            .login-box {
+                padding: 30px 20px;
+            }
+
+            .logo {
+                font-size: 26px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="login-container">
+
+        <div class="login-box">
+
+            <div class="logo">
+                ProjectFlow
+            </div>
+
+            <p class="subtitle">
+                Employee Project Management System
+            </p>
+
+
+            <form id="loginForm">
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ROLE -->
+
+                <div class="form-group">
+
+                    <label for="role">
+                        Select Role
+                    </label>
+
+                    <select id="role" required>
+
+                        <option value="">
+                            Select your role
+                        </option>
+
+                        <option value="employee">
+                            Employee
+                        </option>
+
+                        <option value="leader">
+                            Team Leader
+                        </option>
+
+                        <option value="admin">
+                            Admin
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ERROR MESSAGE -->
+
+                <div id="errorMessage"></div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+                    Login
+                </button>
+
+
+            </form>
+
+
+            <a
+                href="index.html"
+                class="back-link"
+            >
+                ← Back to Home
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- LOGIN JAVASCRIPT -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+
+            const loginForm =
+                document.getElementById("loginForm");
+
+            const errorMessage =
+                document.getElementById("errorMessage");
+
+
+            loginForm.addEventListener(
+                "submit",
+                async function (event) {
+
+
+                    event.preventDefault();
+
+
+                    const email =
+                        document.getElementById("email").value.trim();
+
+
+                    const password =
+                        document.getElementById("password").value;
+
+
+                    const role =
+                        document.getElementById("role").value;
+
+
+
+                    /* CHECK EMPTY FIELDS */
+
+                    if (
+                        email === "" ||
+                        password === "" ||
+                        role === ""
+                    ) {
+
+                        errorMessage.textContent =
+                            "Please fill all fields.";
+
+                        errorMessage.style.display =
+                            "block";
+
+                        return;
+                    }
+
+
+
+                    /* HIDE OLD ERROR */
+
+                    errorMessage.style.display =
+                        "none";
+
+
+
+                    try {
+
+
+                        /* SEND LOGIN REQUEST TO BACKEND */
+
+                        const response = await fetch(
+                            "http://localhost:5000/api/login",
+                            {
+
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+
+                                    email: email,
+
+                                    password: password,
+
+                                    role: role
+
+                                })
+
+                            }
+                        );
+
+
+
+                        const data =
+                            await response.json();
+
+
+
+                        /* LOGIN FAILED */
+
+                        if (!data.success) {
+
+                            errorMessage.textContent =
+                                data.message;
+
+                            errorMessage.style.display =
+                                "block";
+
+                            return;
+                        }
+
+
+
+                        /* LOGIN SUCCESS */
+
+                        errorMessage.style.display =
+                            "none";
+
+
+
+                        /* EMPLOYEE */
+
+                        if (role === "employee") {
+
+                            window.location.href =
+                                "employee-dashboard.html";
+
+                        }
+
+
+                        /* TEAM LEADER */
+
+                        else if (role === "leader") {
+
+                            window.location.href =
+                                "leader-dashboard.html";
+
+                        }
+
+
+                        /* ADMIN */
+
+                        else if (role === "admin") {
+
+                            window.location.href =
+                                "admin-dashboard.html";
+
+                        }
+
+
+                    }
+
+
+                    catch (error) {
+
+
+                        console.error(
+                            "Login Error:",
+                            error
+                        );
+
+
+                        errorMessage.textContent =
+                            "Unable to connect to server. Make sure your backend server is running.";
+
+
+                        errorMessage.style.display =
+                            "block";
+
+                    }
+
+
+                }
+            );
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

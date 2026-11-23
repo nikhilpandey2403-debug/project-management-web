@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ProjectFlow | Employee Project Management</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: #222;
+        }
+
+        /* NAVBAR */
+        nav {
+            width: 100%;
+            height: 70px;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 15px;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        .login-btn {
+            text-decoration: none;
+            background-color: #2563eb;
+            color: white;
+            padding: 11px 22px;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        .login-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 70px 7%;
+            gap: 50px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 52px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: #2563eb;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #2563eb;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .hero-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* DASHBOARD PREVIEW */
+        .dashboard-preview {
+            width: 450px;
+            height: 320px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+            padding: 25px;
+        }
+
+        .dashboard-preview h3 {
+            margin-bottom: 25px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 15px;
+        }
+
+        .stat-box {
+            flex: 1;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f1f5f9;
+        }
+
+        .stat-box h2 {
+            margin-bottom: 8px;
+        }
+
+        .stat-box p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .progress {
+            margin-top: 30px;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 75%;
+            height: 100%;
+            background-color: #2563eb;
+        }
+
+        /* FEATURES */
+        .features {
+            padding: 80px 7%;
+            background-color: white;
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .features > p {
+            color: #666;
+            margin-bottom: 45px;
+        }
+
+        .feature-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .feature-card {
+            width: 250px;
+            padding: 30px 20px;
+            border-radius: 12px;
+            background-color: #f8fafc;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-card .icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #111827;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .dashboard-preview {
+                width: 100%;
+                max-width: 450px;
+            }
+
+            .hero-content h1 {
+                font-size: 40px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .hero {
+                padding: 50px 5%;
+            }
+
+            .dashboard-preview {
+                height: auto;
+            }
+
+            .stats {
+                flex-direction: column;
+            }
+
+            .feature-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+
+        <div class="logo">
+            ProjectFlow
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+
+        <a href="login.html" class="login-btn">
+            Login
+        </a>
+
+    </nav>
+
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <h1>
+                Manage Your
+                <span>Projects Smarter.</span>
+            </h1>
+
+            <p>
+                ProjectFlow is an employee project management
+                platform where teams can manage projects,
+                track tasks, monitor progress and improve
+                productivity.
+            </p>
+
+            <a href="login.html" class="hero-btn">
+                Get Started
+            </a>
+
+        </div>
+
+
+        <!-- DASHBOARD PREVIEW -->
+        <div class="dashboard-preview">
+
+            <h3>Project Overview</h3>
+
+            <div class="stats">
+
+                <div class="stat-box">
+                    <h2>12</h2>
+                    <p>Projects</p>
+                </div>
+
+                <div class="stat-box">
+                    <h2>28</h2>
+                    <p>Tasks</p>
+                </div>
+
+                <div class="stat-box">
+                    <h2>75%</h2>
+                    <p>Progress</p>
+                </div>
+
+            </div>
+
+            <div class="progress">
+
+                <p>Overall Project Progress</p>
+
+                <br>
+
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+    <section class="features" id="features">
+
+        <h2>Powerful Features</h2>
+
+        <p>
+            Everything your team needs to manage projects efficiently.
+        </p>
+
+        <div class="feature-container">
+
+            <div class="feature-card">
+
+                <div class="icon">📊</div>
+
+                <h3>Project Tracking</h3>
+
+                <p>
+                    Track project progress and monitor
+                    important deadlines.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="icon">✅</div>
+
+                <h3>Task Management</h3>
+
+                <p>
+                    Create, assign and manage tasks
+                    for your team.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="icon">👥</div>
+
+                <h3>Team Management</h3>
+
+                <p>
+                    Manage employees and control
+                    access using different roles.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="icon">🤖</div>
+
+                <h3>AI Assistant</h3>
+
+                <p>
+                    Use AI to summarize project updates
+                    and suggest next tasks.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        
+       
+<p> © 2026 ProjectFlow. All Rights Reserved. </p> </footer> <script src="script.js"></script> </body> </html>
